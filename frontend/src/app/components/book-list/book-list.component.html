@@ -1,0 +1,29 @@
+<h2>Book List</h2>
+@if (books.length) {
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Available Copies</th>
+      <th>Total Copies</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="book-item" *ngFor="let book of books">
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td class="available-copies">{{ book.availableCopies }}</td>
+      <td>{{ book.totalCopies }}</td>
+      <td>
+        @if (book.id) {
+        <button class="borrow" (click)="borrowBook(book.id)">Borrow</button>
+        <button (click)="returnBook(book.id)">Return</button>
+        <button class="delete" (click)="deleteBook(book.id)">Delete</button>
+        }
+      </td>
+    </tr>
+  </tbody>
+</table>
+} @else { <div>Please add a new book to the library</div>}

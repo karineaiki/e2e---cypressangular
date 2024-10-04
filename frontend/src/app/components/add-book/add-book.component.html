@@ -1,0 +1,53 @@
+<h2>Add Book</h2>
+<form (ngSubmit)="addBook()" #bookForm="ngForm">
+  <label for="title">
+    <span>Title:&nbsp;</span>
+    <input
+      type="text"
+      id="title"
+      [(ngModel)]="title"
+      name="title"
+      required
+      #titleInput="ngModel"
+    />
+
+    <div *ngIf="titleInput.invalid && titleInput.touched" class="error">
+      Title is required.
+    </div>
+  </label>
+
+  <label for="author">
+    <span>Author:&nbsp;</span>
+    <input
+      type="text"
+      id="author"
+      [(ngModel)]="author"
+      name="author"
+      required
+      #authorInput="ngModel"
+    />
+    <div *ngIf="authorInput.invalid && authorInput.touched" class="error">
+      Author is required.
+    </div>
+  </label>
+
+  <label for="copies">
+    <span>Total Copies:&nbsp;</span>
+    <input
+      type="number"
+      id="copies"
+      required
+      min="1"
+      [(ngModel)]="totalCopies"
+      name="totalCopies"
+      #copiesInput="ngModel"
+    />
+    <div *ngIf="copiesInput.invalid && copiesInput.touched" class="error">
+      <span *ngIf="copiesInput.errors?.['required']"
+        >Total copies is required.</span
+      >
+      <span *ngIf="copiesInput.errors?.['min']">Must be at least 1 copy.</span>
+    </div>
+  </label>
+  <button type="submit" [disabled]="bookForm.invalid">Add Book</button>
+</form>
